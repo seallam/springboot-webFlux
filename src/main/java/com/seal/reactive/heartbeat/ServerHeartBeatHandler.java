@@ -2,10 +2,9 @@ package com.seal.reactive.heartbeat;
 
 import com.google.common.collect.Maps;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Map;
  * @e-mail: linxiao@xingfeiinc.com
  * @date: 2018-10-30 15:00
  */
-public class ServerHeartBeatHandler extends ChannelHandlerAdapter {
+public class ServerHeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     private static Map<String, String> AUTH_IP_MAP = Maps.newHashMap();
     private static final String SUCCESS_KEY = "auth_success_key";
@@ -44,7 +43,7 @@ public class ServerHeartBeatHandler extends ChannelHandlerAdapter {
             System.out.println("--------------------------------------------");
             System.out.println("当前主机ip为: " + info.getIp());
             System.out.println("当前主机cpu情况: ");
-            HashMap<String, Object> cpu = info.getCpuPercMap();
+            Map<String, Object> cpu = info.getCpuPercMap();
             System.out.println("总使用率: " + cpu.get("combined"));
             System.out.println("用户使用率: " + cpu.get("user"));
             System.out.println("系统使用率: " + cpu.get("sys"));
@@ -52,7 +51,7 @@ public class ServerHeartBeatHandler extends ChannelHandlerAdapter {
             System.out.println("空闲率: " + cpu.get("idle"));
 
             System.out.println("当前主机memory情况: ");
-            HashMap<String, Object> memory = info.getMemoryMap();
+            Map<String, Object> memory = info.getMemoryMap();
             System.out.println("内存总量: " + memory.get("total"));
             System.out.println("当前内存使用量: " + memory.get("used"));
             System.out.println("当前内存剩余量: " + memory.get("free"));

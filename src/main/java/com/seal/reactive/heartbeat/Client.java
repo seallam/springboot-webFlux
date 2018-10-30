@@ -10,6 +10,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author: seal
  * @Description:
@@ -42,7 +44,11 @@ public class Client {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            group.shutdownGracefully();
+            try {
+                group.shutdownGracefully(5, 5, TimeUnit.SECONDS);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

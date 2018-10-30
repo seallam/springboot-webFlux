@@ -21,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 public class Server {
 
     public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(5);
 
         ServerBootstrap bootstrap = new ServerBootstrap();
         try {
@@ -42,7 +42,7 @@ public class Server {
             ChannelFuture cf = bootstrap.bind(8765).sync();
             cf.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-//            log.error(e.getLocalizedMessage(), e);
+            log.error(e.getLocalizedMessage(), e);
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
