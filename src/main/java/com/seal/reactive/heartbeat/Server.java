@@ -42,7 +42,7 @@ public class Server {
             ChannelFuture cf = bootstrap.bind(8765).sync();
             cf.channel().closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error(e.getLocalizedMessage(), e);
+//            log.error(e.getLocalizedMessage(), e);
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

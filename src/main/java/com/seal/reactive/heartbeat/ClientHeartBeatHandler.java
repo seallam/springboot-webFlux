@@ -3,6 +3,7 @@ package com.seal.reactive.heartbeat;
 import com.google.common.collect.Maps;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
 import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.Mem;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @e-mail: linxiao@xingfeiinc.com
  * @date: 2018-10-30 15:38
  */
-public class ClientHeartBeatHandler extends ChannelHandlerAdapter {
+public class ClientHeartBeatHandler extends ChannelInboundHandlerAdapter {
 
     private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
